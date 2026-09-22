@@ -9,7 +9,7 @@ export const botConfig = {
   // - "idle"      = yellow moon
   // - "dnd"       = red do-not-disturb
   // - "invisible" = appears offline
-  presence: {dnd
+  presence: {
     // Current online state shown on Discord.
     status: "dnd",
 
