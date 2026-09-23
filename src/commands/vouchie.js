@@ -10,7 +10,7 @@ import {
 } from 'discord.js';
 
 // Replace this with the ID of the channel where you want reviews to be posted!
-const REVIEWS_CHANNEL_ID = 'YOUR_CHANNEL_ID_HERE'; 
+const REVIEWS_CHANNEL_ID = '1552314115719045160'; 
 
 export const data = new SlashCommandBuilder()
   .setName('vouch')
@@ -19,13 +19,13 @@ export const data = new SlashCommandBuilder()
 export async function execute(interaction) {
   // 1. Send the message with the button
   const embed = new EmbedBuilder()
-    .setTitle('✨ Leave a Vouch')
-    .setDescription('Click the button below to leave feedback or a comment!')
+    .setTitle('leave a vouchie')
+    .setDescription('click the button below to leave a feedback , comement')
     .setColor(0xFFB6C1);
 
   const button = new ButtonBuilder()
     .setCustomId('open_vouch_modal')
-    .setLabel('Leave a Comment')
+    .setLabel('leave a comment')
     .setStyle(ButtonStyle.Primary)
     .setEmoji('💬');
 
@@ -36,17 +36,17 @@ export async function execute(interaction) {
 
 // 2. Handle the button click and pop-up form submit
 export async function handleInteraction(interaction) {
-  // If they click the "Leave a Comment" button -> Show Pop-up
+  // If they click the "leave a comment" button -> Show Pop-up
   if (interaction.isButton() && interaction.customId === 'open_vouch_modal') {
     const modal = new ModalBuilder()
       .setCustomId('vouch_modal_submit')
-      .setTitle('Submit Your Vouch');
+      .setTitle('submit your vouchie');
 
     const commentInput = new TextInputBuilder()
       .setCustomId('vouch_comment_text')
-      .setLabel('Your Comment / Review')
+      .setLabel('your comment / review')
       .setStyle(TextInputStyle.Paragraph)
-      .setPlaceholder('Type your feedback here...')
+      .setPlaceholder('type your feedback here . .')
       .setRequired(true);
 
     const firstRow = new ActionRowBuilder().addComponents(commentInput);
@@ -60,9 +60,9 @@ export async function handleInteraction(interaction) {
     const comment = interaction.fields.getTextInputValue('vouch_comment_text');
 
     const reviewEmbed = new EmbedBuilder()
-      .setTitle('🌟 New Vouch!')
+      .setTitle('🌟 new vouchie')
       .setDescription(comment)
-      .addFields({ name: 'Vouched By', value: ${interaction.user}, inline: true })
+      .addFields({ name: 'vouched by', value: ${interaction.user}, inline: true })
       .setThumbnail(interaction.user.displayAvatarURL())
       .setColor(0xFFB6C1)
       .setTimestamp();
@@ -72,6 +72,6 @@ export async function handleInteraction(interaction) {
       await reviewChannel.send({ embeds: [reviewEmbed] });
     }
 
-    await interaction.reply({ content: 'Thank you for your vouch!', ephemeral: true });
+    await interaction.reply({ content: 'thank you for your review', ephemeral: true });
   }
 }
